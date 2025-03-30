@@ -8,7 +8,7 @@ namespace Hear_Read_WDT_Project.Models
         [Key]
         public int SubscriptionId { get; set; }
         public int UserId { get; set; }
-        public string PlanType { get; set; } 
+        public required string PlanType { get; set; } 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool CanDownload { get; set; }

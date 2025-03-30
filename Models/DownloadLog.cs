@@ -10,8 +10,8 @@ namespace Hear_Read_WDT_Project.Models
         public int UserId { get; set; }
         public int BookId { get; set; }
         public DateTime DownloadDate { get; set; }
-        public string DeviceInfo { get; set; }
-        public string IpAddress { get; set; }
+        public required string DeviceInfo { get; set; }
+        public required string IpAddress { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }
