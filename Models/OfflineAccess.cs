@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hear_Read_WDT_Project.Models
 {
@@ -7,16 +8,23 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int OfflineId { get; set; }
-        public int UserId { get; set; }
-        public int BookId { get; set; }
-        public DateTime DownloadDate { get; set; }
+
+        public int UserId { get; set; }  // Nullable Foreign Key, if needed: int? UserId
+        public int BookId { get; set; }  // Nullable Foreign Key, if needed: int? BookId
+        public DateTime DownloadDate { get; set; } = DateTime.UtcNow;  // Default to current timestamp
         public DateTime ValidUntil { get; set; }
 
+        // Validation to ensure ValidUntil is greater than DownloadDate
+        [NotMapped]
+        public bool IsValid => ValidUntil > DownloadDate;
+
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [ForeignKey("BookId")]
-        public Book Book { get; set; }
+        public virtual required Book Book { get; set; }
 
+        // Soft delete feature
+        public bool? IsDeleted { get; set; }
     }
 }
