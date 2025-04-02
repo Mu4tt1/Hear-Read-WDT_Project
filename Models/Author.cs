@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hear_Read_WDT_Project.Models
 {
@@ -6,9 +7,13 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int AuthorId { get; set; }
-        public string Name { get; set; }
-        public string Bio { get; set; }
-        public virtual ICollection<Book_Authors> Book_Authors { get; set; }
-    
+
+        [Required]
+        public required string Name { get; set; }
+
+        [Required]
+        public required string Bio { get; set; }
+
+        public virtual ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
     }
 }
