@@ -91,4 +91,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 - **.NET**: Powered by [Microsoft .NET](https://dotnet.microsoft.com/).
 - Special thanks to the open-source community for all their resources and contributions.
-```
