@@ -21,6 +21,6 @@ namespace Hear_Read_WDT_Project.Models
         public Author Author { get; set; }
 
         [ForeignKey("BookId")]
-        public Book Book { get; set; }
+        public Book Book { get; set; }//hgo
     }
 }
