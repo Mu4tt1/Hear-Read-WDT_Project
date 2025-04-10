@@ -10,7 +10,7 @@ namespace Hear_Read_WDT_Project.Models
         public string Name { get; set; }
         public string Bio { get; set; }
         public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
-        public ICollection<AuthorCopyright> AuthorCopyrights { get; set; } = new List<AuthorCopyright>();
+        public ICollection<AuthorCopyright> AuthorCopyrights { get; set; } = new List<AuthorCopyright>();//hh
 
     }
 }
