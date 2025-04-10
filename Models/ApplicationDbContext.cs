@@ -6,7 +6,6 @@ namespace Hear_Read_WDT_Project.Models
 {
     public class ApplicationDbContext : DbContext
     {
-        // DbSet properties representing tables in the database
         public DbSet<User> Users { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Book> Books { get; set; }
@@ -19,9 +18,8 @@ namespace Hear_Read_WDT_Project.Models
         public DbSet<DownloadLog> DownloadLogs { get; set; }
         public DbSet<OfflineAccess> OfflineAccesses { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<Copyright> Copyrights { get; set; }
+        public DbSet<AuthorCopyright> AuthorCopyrights { get; set; }
 
-        // Constructor to initialize the DbContext with options (e.g., database connection string)
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         // OnModelCreating method to configure relationships, constraints, and other configurations
@@ -176,6 +174,5 @@ namespace Hear_Read_WDT_Project.Models
         //    modelBuilder.Entity<BookCategory>()
         //        .HasIndex(bc => new { bc.BookId, bc.CategoryId })
         //        .IsUnique();  // Ensures that a book can only be associated with a category once
-        }
     }
 }

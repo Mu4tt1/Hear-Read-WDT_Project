@@ -8,21 +8,16 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int LogId { get; set; }
-
-        public int? UserId { get; set; }  // Nullable Foreign Key
-        public int? BookId { get; set; }  // Nullable Foreign Key
-        public DateTime DownloadDate { get; set; } = DateTime.UtcNow;  // Default to current timestamp
-
-        [Required]  // Ensures that DeviceInfo is required
-        public required string DeviceInfo { get; set; }
-
-        [Required]  // Ensures that IpAddress is required
-        public required string IpAddress { get; set; }
+        public int UserId { get; set; }
+        public int BookId { get; set; }
+        public DateTime DownloadDate { get; set; }
+        public string DeviceInfo { get; set; }
+        public string IpAddress { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public User User { get; set; }
 
         [ForeignKey("BookId")]
-        public virtual required Book Book { get; set; }
+        public Book Book { get; set; }
     }
 }
