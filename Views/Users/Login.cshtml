@@ -1,0 +1,36 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">Login to Hear&Read</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Login" method="post">
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+
+                <div class="text-center mt-3">
+                    <small>Don't have an account? <a href="/Users/Register">Register here</a></small>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

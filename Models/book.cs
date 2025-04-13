@@ -18,6 +18,8 @@ namespace Hear_Read_WDT_Project.Models
         public DateTime CreatedAt { get; set; }
         public bool IsPremiumOnly { get; set; }
         public int NarratorId { get; set; }
+        public string Author { get; set; }
+        public string ImageUrl { get; set; }
 
         [ForeignKey("NarratorId")]
         public Narrator Narrator { get; set; }

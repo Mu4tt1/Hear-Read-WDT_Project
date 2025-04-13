@@ -3,48 +3,68 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Hear_Read_WDT_Project</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Hear_Read_WDT_Project.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Hear&Read</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">YourLogo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Audiobooks</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Books</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
-                    </ul>
-                    <div class="d-flex">
-                        <a class="btn btn-outline-primary me-2" href="#">Login</a>
-                        <a class="btn btn-primary" href="#">Subscribe</a>
-                    </div>
-                </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">Hear&Read</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Books">Books</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Subscriptions">Subscribe</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/Users/Login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Users/Register">Register</a></li>
+                </ul>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p>&copy; 2025 Hear-&-Read. All rights reserved.</p>
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">© @DateTime.Now.Year - Hear&Read. All rights reserved.</p>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

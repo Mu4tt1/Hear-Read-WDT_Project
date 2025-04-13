@@ -1,10 +1,16 @@
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/images/hero.jpg') center/cover no-repeat;
-    color: white;
-    padding: 100px 0;
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
 }
 
-.feature-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
+.hero-banner {
+    background: url('https://images.unsplash.com/photo-1512295767273-ac109ac3acfa') no-repeat center center;
+    background-size: cover;
+    height: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+    .hero-banner::after
