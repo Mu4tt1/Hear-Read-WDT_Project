@@ -13,4 +13,67 @@ body {
     justify-content: center;
 }
 
-    .hero-banner::after
+    .hero-banner::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.section-spacing {
+    padding: 60px 0;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.book-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: white;
+    transition: transform 0.2s ease;
+}
+
+    .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+.book-img {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.categories-section {
+    background-color: #fffdf5;
+}
+
+.category-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+}
+
+    .category-btn:hover {
+        background-color: #ffc107;
+        color: white;
+    }
+
+.cta-section {
+    padding: 50px 20px;
+    background-color: #333;
+    color: white;
+}

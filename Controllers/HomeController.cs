@@ -24,10 +24,6 @@ namespace Hear_Read_WDT_Project.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult Privacy()
         {

@@ -14,24 +14,56 @@
     </div>
 </section>
 
-<!-- Featured Books -->
+@{
+    var images = new[] { "photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg", "photo5.jpeg", "photo6.jpeg" };
+    var i = 0;
+    var bookGroups = Model.Select((book, index) => new { book, index })
+                          .GroupBy(x => x.index / 3)
+                          .ToList();
+
+}
 <section class="container section-spacing">
-    <h2 class="section-title">Featured Books</h2>
-    <div class="row g-4">
-        @foreach (var book in Model)
-        {
-            <div class="col-md-3 col-sm-6">
-                <div class="book-card shadow-sm">
-                    <img src="@book.ImageUrl" alt="@book.Title" class="img-fluid book-img">
-                    <div class="p-3">
-                        <h5 class="mb-1">@book.Title</h5>
-                        <p class="text-muted">@book.Author</p>
+    <h2 class="section-title text-center mb-5">Featured Books</h2>
+
+    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+            @for (int g = 0; g < bookGroups.Count; g++)
+            {
+                var isActive = g == 0 ? "active" : "";
+                <div class="carousel-item @isActive">
+                    <div class="row justify-content-center">
+                        @foreach (var item in bookGroups[g])
+                        {
+                            var image = images[i % images.Length];
+                            <div class="col-md-4">
+                                <div class="card mb-4">
+                                    <img src="~/images/@image" class="card-img-top" alt="@item.book.Title">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">@item.book.Title</h5>
+                                        <p class="card-text text-muted">@item.book.Author</p>
+                                    </div>
+                                </div>
+                            </div>
+                            i++;
+                        }
                     </div>
                 </div>
-            </div>
-        }
+            }
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </section>
+
 
 <!-- Categories -->
 <section class="categories-section section-spacing">
