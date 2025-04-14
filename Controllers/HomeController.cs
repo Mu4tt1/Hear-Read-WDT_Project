@@ -1,39 +1,50 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using Hear_Read_WDT_Project.Models;
-using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Hosting;
+using Hear_Read_WDT_Project.Models; // عدل على حسب اسم مشروعك
 
-namespace Hear_Read_WDT_Project.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly IWebHostEnvironment _env;
+
+    public HomeController(ILogger<HomeController> logger, IWebHostEnvironment env)
     {
-        private readonly ILogger<HomeController> _logger;
-        public IActionResult Index()
-        {
-            var books = new List<Book>
-        {
-            new Book { BookId = 1, Title = "The Power of Now", Author = "Eckhart Tolle", ImageUrl = "https://via.placeholder.com/300x400?text=Book+1" },
-            new Book { BookId = 2, Title = "Atomic Habits", Author = "James Clear", ImageUrl = "https://via.placeholder.com/300x400?text=Book+2" },
-            new Book { BookId = 3, Title = "1984", Author = "George Orwell", ImageUrl = "https://via.placeholder.com/300x400?text=Book+3" },
-            new Book { BookId = 4, Title = "Sapiens", Author = "Yuval Noah Harari", ImageUrl = "https://via.placeholder.com/300x400?text=Book+4" }
-        };
+        _logger = logger;
+        _env = env;
+    }
+    
+    public IActionResult Index()
+    {
+        var imageFolder = Path.Combine(_env.WebRootPath, "images");
+        var images = Directory.GetFiles(imageFolder)
+                              .Select(Path.GetFileName)
+                              .Where(name => !string.IsNullOrEmpty(name) && !name.Contains("Logo-Hear&Read"))
+                              .ToList();
 
-            return View(books);
-        }
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        ViewBag.Images = images;
 
+        var books = new List<Book>
+{
+    new Book { BookId = 1, Title = "The Power of Now", Author = "Eckhart Tolle", ImageUrl = "/images/photo1.jpeg", Description = "A guide to spiritual enlightenment." },
+    new Book { BookId = 2, Title = "Atomic Habits", Author = "James Clear", ImageUrl = "/images/photo2.jpeg",  Description = "Build good habits and break bad ones." },
+    new Book { BookId = 3, Title = "1984", Author = "George Orwell", ImageUrl = "/images/photo3.jpeg",  Description = "A dystopian social science fiction novel." },
+    new Book { BookId = 4, Title = "Sapiens", Author = "Yuval Noah Harari", ImageUrl = "/images/photo4.jpeg",  Description = "A brief history of humankind." }
+};
+        return View(books);
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

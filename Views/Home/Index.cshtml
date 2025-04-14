@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Hear_Read_WDT_Project.Models.Book>
+
+
 @{
     ViewData["Title"] = "Home";
 }
@@ -15,37 +17,31 @@
 </section>
 
 @{
-    var images = new[] { "photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg", "photo5.jpeg", "photo6.jpeg" };
-    var i = 0;
-    var bookGroups = Model.Select((book, index) => new { book, index })
-                          .GroupBy(x => x.index / 3)
-                          .ToList();
-
+    var images = ViewBag.Images as List<string>;
+    var groups = images.Select((img, idx) => new { img, idx }).GroupBy(x => x.idx / 3).ToList();
 }
-<section class="container section-spacing">
-    <h2 class="section-title text-center mb-5">Featured Books</h2>
 
-    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+<section class="container section-spacing">
+    <h2 class="section-title text-center mb-5">Image Gallery</h2>
+
+    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
 
-            @for (int g = 0; g < bookGroups.Count; g++)
+            @for (int g = 0; g < groups.Count; g++)
             {
                 var isActive = g == 0 ? "active" : "";
                 <div class="carousel-item @isActive">
                     <div class="row justify-content-center">
-                        @foreach (var item in bookGroups[g])
+                        @foreach (var item in groups[g])
                         {
-                            var image = images[i % images.Length];
                             <div class="col-md-4">
                                 <div class="card mb-4">
-                                    <img src="~/images/@image" class="card-img-top" alt="@item.book.Title">
+                                    <img src="~/images/@item.img" class="card-img-top" alt="Book Image">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title">@item.book.Title</h5>
-                                        <p class="card-text text-muted">@item.book.Author</p>
+                                        <h5 class="card-title">@item.img</h5>
                                     </div>
                                 </div>
                             </div>
-                            i++;
                         }
                     </div>
                 </div>
@@ -53,14 +49,35 @@
 
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+    </div>
+</section>
+<section class="container py-5">
+    <h2 class="mb-4 text-center">Our Featured Books</h2>
+
+    <div class="row g-4">
+        @foreach (var book in Model)
+        {
+            <div>@book.Title</div>
+            <div class="col-md-4 col-lg-3">
+                <div class="card custom-card h-100 shadow-sm">
+                    <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@book.Title</h5>
+                        <p class="text-muted mb-1">@book.Author</p>
+                        <p class="card-text text-sm">@book.Description</p>
+                        
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </section>
 
