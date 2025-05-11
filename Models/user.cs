@@ -9,16 +9,20 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int UserId { get; set; }
-        public string Name { get; set; }
+
+        [Required, MaxLength(100)]
+        public string Username { get; set; }
+
+        [Required, EmailAddress]
         public string Email { get; set; }
+
+        [Required]
         public string PasswordHash { get; set; }
-        public string SubscriptionType { get; set; } // ENUM(Free, Premium)
-        public DateTime CreatedAt { get; set; }
 
-        public ICollection<Subscription> Subscriptions { get; set; } = new List<Subscription>();
-        public ICollection<Review> Reviews { get; set; } = new List<Review>();
-        public ICollection<DownloadLog> DownloadLogs { get; set; } = new List<DownloadLog>();
-        public ICollection<OfflineAccess> OfflineAccesses { get; set; } = new List<OfflineAccess>();
+        public ICollection<Subscription> Subscriptions { get; set; }
 
+        public ICollection<Review> Reviews { get; set; }
+
+        public ICollection<Payment> Payments { get; set; }
     }
 }

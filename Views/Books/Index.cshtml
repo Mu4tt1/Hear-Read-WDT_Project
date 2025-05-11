@@ -19,25 +19,19 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Path)
+                @Html.DisplayNameFor(model => model.CoverImageUrl)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Duration)
+                @Html.DisplayNameFor(model => model.PublishedDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Language)
+                @Html.DisplayNameFor(model => model.Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rating)
+                @Html.DisplayNameFor(model => model.PublishingHouseId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPremiumOnly)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Narrator)
+                @Html.DisplayNameFor(model => model.PublishingHouse)
             </th>
             <th></th>
         </tr>
@@ -52,25 +46,19 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Path)
+                @Html.DisplayFor(modelItem => item.CoverImageUrl)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Duration)
+                @Html.DisplayFor(modelItem => item.PublishedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Language)
+                @Html.DisplayFor(modelItem => item.Category.CategoryId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rating)
+                @Html.DisplayFor(modelItem => item.PublishingHouseId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPremiumOnly)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Narrator.NarratorId)
+                @Html.DisplayFor(modelItem => item.PublishingHouse.PublishingHouseId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |

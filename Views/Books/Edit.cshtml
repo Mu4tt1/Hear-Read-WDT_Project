@@ -24,39 +24,29 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Path" class="control-label"></label>
-                <input asp-for="Path" class="form-control" />
-                <span asp-validation-for="Path" class="text-danger"></span>
+                <label asp-for="CoverImageUrl" class="control-label"></label>
+                <input asp-for="CoverImageUrl" class="form-control" />
+                <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Duration" class="control-label"></label>
-                <input asp-for="Duration" class="form-control" />
-                <span asp-validation-for="Duration" class="text-danger"></span>
+                <label asp-for="PublishedDate" class="control-label"></label>
+                <input asp-for="PublishedDate" class="form-control" />
+                <span asp-validation-for="PublishedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Language" class="control-label"></label>
-                <input asp-for="Language" class="form-control" />
-                <span asp-validation-for="Language" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <input asp-for="Rating" class="form-control" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsPremiumOnly" /> @Html.DisplayNameFor(model => model.IsPremiumOnly)
-                </label>
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NarratorId" class="control-label"></label>
                 <select asp-for="NarratorId" class="form-control" asp-items="ViewBag.NarratorId"></select>
                 <span asp-validation-for="NarratorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PublishingHouseId" class="control-label"></label>
+                <input asp-for="PublishingHouseId" class="form-control" />
+                <span asp-validation-for="PublishingHouseId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

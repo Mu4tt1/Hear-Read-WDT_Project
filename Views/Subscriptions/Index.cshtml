@@ -13,19 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PlanType)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CanDownload)
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.Plan)
             </th>
             <th></th>
         </tr>
@@ -34,19 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PlanType)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CanDownload)
+                @Html.DisplayFor(modelItem => item.User.UserId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.UserId)
+                @Html.DisplayFor(modelItem => item.Plan.PlanId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.SubscriptionId">Edit</a> |

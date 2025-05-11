@@ -8,16 +8,20 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int ReviewId { get; set; }
-        public int UserId { get; set; }
+        [ForeignKey("BookId")]
         public int BookId { get; set; }
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
+
+        [Required]
+        public string Content { get; set; }
+
         public int Rating { get; set; }
-        public string Comment { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
-        [ForeignKey("UserId")]
-        public User User { get; set; }
-
-        [ForeignKey("BookId")]
         public Book Book { get; set; }
+
+        public User User { get; set; }
     }
 }

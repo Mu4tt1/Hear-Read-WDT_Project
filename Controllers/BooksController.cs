@@ -21,7 +21,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Books.Include(b => b.Narrator);
+            var applicationDbContext = _context.Books.Include(b => b.Category).Include(b => b.PublishingHouse);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +34,8 @@ namespace Hear_Read_WDT_Project.Controllers
             }
 
             var book = await _context.Books
-                .Include(b => b.Narrator)
+                .Include(b => b.Category)
+                .Include(b => b.PublishingHouse)
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {
@@ -47,16 +48,15 @@ namespace Hear_Read_WDT_Project.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
-            ViewData["NarratorId"] = new SelectList(_context.Narrators, "NarratorId", "NarratorId");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
+            ViewData["PublishingHouseId"] = new SelectList(_context.PublishingHouses, "PublishingHouseId", "PublishingHouseId");
             return View();
         }
 
         // POST: Books/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,Title,Description,Path,Duration,Language,Rating,CreatedAt,IsPremiumOnly,NarratorId")] Book book)
+        public async Task<IActionResult> Create([Bind("BookId,Title,Description,CoverImageUrl,PublishedDate,CategoryId,NarratorId,PublishingHouseId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,8 @@ namespace Hear_Read_WDT_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["NarratorId"] = new SelectList(_context.Narrators, "NarratorId", "NarratorId", book.NarratorId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", book.CategoryId);
+            ViewData["PublishingHouseId"] = new SelectList(_context.PublishingHouses, "PublishingHouseId", "PublishingHouseId", book.PublishingHouseId);
             return View(book);
         }
 
@@ -81,16 +82,15 @@ namespace Hear_Read_WDT_Project.Controllers
             {
                 return NotFound();
             }
-            ViewData["NarratorId"] = new SelectList(_context.Narrators, "NarratorId", "NarratorId", book.NarratorId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", book.CategoryId);
+            ViewData["PublishingHouseId"] = new SelectList(_context.PublishingHouses, "PublishingHouseId", "PublishingHouseId", book.PublishingHouseId);
             return View(book);
         }
 
         // POST: Books/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Description,Path,Duration,Language,Rating,CreatedAt,IsPremiumOnly,NarratorId")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Description,CoverImageUrl,PublishedDate,CategoryId,NarratorId,PublishingHouseId")] Book book)
         {
             if (id != book.BookId)
             {
@@ -117,7 +117,8 @@ namespace Hear_Read_WDT_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["NarratorId"] = new SelectList(_context.Narrators, "NarratorId", "NarratorId", book.NarratorId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", book.CategoryId);
+            ViewData["PublishingHouseId"] = new SelectList(_context.PublishingHouses, "PublishingHouseId", "PublishingHouseId", book.PublishingHouseId);
             return View(book);
         }
 
@@ -130,7 +131,8 @@ namespace Hear_Read_WDT_Project.Controllers
             }
 
             var book = await _context.Books
-                .Include(b => b.Narrator)
+                .Include(b => b.Category)
+                .Include(b => b.PublishingHouse)
                 .FirstOrDefaultAsync(m => m.BookId == id);
             if (book == null)
             {

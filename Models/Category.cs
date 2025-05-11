@@ -7,7 +7,10 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int CategoryId { get; set; }
+
+        [Required, MaxLength(100)]
         public string Name { get; set; }
-        public ICollection<BookCategory> BookCategories { get; set; } = new List<BookCategory>();
+
+        public ICollection<BookCategory> BookCategories { get; set; }
     }
 }

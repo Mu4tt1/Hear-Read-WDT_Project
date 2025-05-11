@@ -7,13 +7,11 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int BookAuthorId { get; set; }
-        public int BookId { get; set; }
-        public int AuthorId { get; set; }
-
         [ForeignKey("BookId")]
+        public int BookId { get; set; }
         public Book Book { get; set; }
-
         [ForeignKey("AuthorId")]
+        public int AuthorId { get; set; }
         public Author Author { get; set; }
     }
 }

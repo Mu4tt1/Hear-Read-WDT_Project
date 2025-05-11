@@ -23,46 +23,34 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Path)
+            @Html.DisplayNameFor(model => model.CoverImageUrl)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Path)
+            @Html.DisplayFor(model => model.CoverImageUrl)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Duration)
+            @Html.DisplayNameFor(model => model.PublishedDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Duration)
+            @Html.DisplayFor(model => model.PublishedDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Language)
+            @Html.DisplayNameFor(model => model.Category)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Language)
+            @Html.DisplayFor(model => model.Category.CategoryId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rating)
+            @Html.DisplayNameFor(model => model.PublishingHouseId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rating)
+            @Html.DisplayFor(model => model.PublishingHouseId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
+            @Html.DisplayNameFor(model => model.PublishingHouse)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsPremiumOnly)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsPremiumOnly)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Narrator)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Narrator.NarratorId)
+            @Html.DisplayFor(model => model.PublishingHouse.PublishingHouseId)
         </dd>
     </dl>
 </div>

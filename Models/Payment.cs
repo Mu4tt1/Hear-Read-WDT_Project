@@ -8,14 +8,20 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int PaymentId { get; set; }
-        public int SubscriptionId { get; set; }
-        public decimal Amount { get; set; }
-        public string PaymentMethod { get; set; } // ENUM(Credit Card, PayPal, Bank Transfer, Other)
-        public string PaymentStatus { get; set; } // ENUM(Completed, Pending, Failed, Refunded)
-        public string TransactionId { get; set; }
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
+        [ForeignKey("PlanId")]
+        public int PlanId { get; set; }
+
         public DateTime PaymentDate { get; set; }
 
-        [ForeignKey("SubscriptionId")]
-        public Subscription Subscription { get; set; }
+        [Required]
+        public decimal Amount { get; set; }
+
+        public string Status { get; set; }
+
+        public User User { get; set; }
+
+        public Plan Plan { get; set; }
     }
 }

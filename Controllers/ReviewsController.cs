@@ -58,7 +58,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReviewId,UserId,BookId,Rating,Comment,CreatedAt")] Review review)
+        public async Task<IActionResult> Create([Bind("ReviewId,BookId,UserId,Content,Rating,CreatedAt")] Review review)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReviewId,UserId,BookId,Rating,Comment,CreatedAt")] Review review)
+        public async Task<IActionResult> Edit(int id, [Bind("ReviewId,BookId,UserId,Content,Rating,CreatedAt")] Review review)
         {
             if (id != review.ReviewId)
             {

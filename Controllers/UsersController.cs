@@ -11,47 +11,6 @@ namespace Hear_Read_WDT_Project.Controllers
 {
     public class UsersController : Controller
     {
-
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // TODO: Save user to database here
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View(model);
-        }
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Login(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // TODO: تحقق من صحة البيانات من قاعدة البيانات
-
-                // لو البيانات صح
-                return RedirectToAction("Index", "Home");
-
-                // لو مش صح
-                // ModelState.AddModelError("", "Invalid email or password.");
-            }
-
-            return View(model);
-        }
-
         private readonly ApplicationDbContext _context;
 
         public UsersController(ApplicationDbContext context)
@@ -94,7 +53,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Name,Email,PasswordHash,SubscriptionType,CreatedAt")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,Username,Email,PasswordHash")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -126,7 +85,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,Name,Email,PasswordHash,SubscriptionType,CreatedAt")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,Username,Email,PasswordHash")] User user)
         {
             if (id != user.UserId)
             {

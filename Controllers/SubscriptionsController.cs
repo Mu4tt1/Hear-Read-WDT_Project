@@ -21,7 +21,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // GET: Subscriptions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Subscriptions.Include(s => s.User);
+            var applicationDbContext = _context.Subscriptions.Include(s => s.Plan).Include(s => s.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,6 +34,7 @@ namespace Hear_Read_WDT_Project.Controllers
             }
 
             var subscription = await _context.Subscriptions
+                .Include(s => s.Plan)
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.SubscriptionId == id);
             if (subscription == null)
@@ -47,6 +48,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // GET: Subscriptions/Create
         public IActionResult Create()
         {
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId");
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             return View();
         }
@@ -56,7 +58,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SubscriptionId,UserId,PlanType,StartDate,EndDate,CanDownload")] Subscription subscription)
+        public async Task<IActionResult> Create([Bind("SubscriptionId,UserId,PlanId,StartDate,EndDate")] Subscription subscription)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +66,7 @@ namespace Hear_Read_WDT_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId", subscription.PlanId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", subscription.UserId);
             return View(subscription);
         }
@@ -81,6 +84,7 @@ namespace Hear_Read_WDT_Project.Controllers
             {
                 return NotFound();
             }
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId", subscription.PlanId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", subscription.UserId);
             return View(subscription);
         }
@@ -90,7 +94,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SubscriptionId,UserId,PlanType,StartDate,EndDate,CanDownload")] Subscription subscription)
+        public async Task<IActionResult> Edit(int id, [Bind("SubscriptionId,UserId,PlanId,StartDate,EndDate")] Subscription subscription)
         {
             if (id != subscription.SubscriptionId)
             {
@@ -117,6 +121,7 @@ namespace Hear_Read_WDT_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId", subscription.PlanId);
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", subscription.UserId);
             return View(subscription);
         }
@@ -130,6 +135,7 @@ namespace Hear_Read_WDT_Project.Controllers
             }
 
             var subscription = await _context.Subscriptions
+                .Include(s => s.Plan)
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.SubscriptionId == id);
             if (subscription == null)

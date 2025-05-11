@@ -14,9 +14,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PaymentId" />
             <div class="form-group">
-                <label asp-for="SubscriptionId" class="control-label"></label>
-                <select asp-for="SubscriptionId" class="form-control" asp-items="ViewBag.SubscriptionId"></select>
-                <span asp-validation-for="SubscriptionId" class="text-danger"></span>
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlanId" class="control-label"></label>
+                <select asp-for="PlanId" class="form-control" asp-items="ViewBag.PlanId"></select>
+                <span asp-validation-for="PlanId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentDate" class="control-label"></label>
+                <input asp-for="PaymentDate" class="form-control" />
+                <span asp-validation-for="PaymentDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
@@ -24,24 +34,9 @@
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PaymentMethod" class="control-label"></label>
-                <input asp-for="PaymentMethod" class="form-control" />
-                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentStatus" class="control-label"></label>
-                <input asp-for="PaymentStatus" class="form-control" />
-                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TransactionId" class="control-label"></label>
-                <input asp-for="TransactionId" class="form-control" />
-                <span asp-validation-for="TransactionId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentDate" class="control-label"></label>
-                <input asp-for="PaymentDate" class="form-control" />
-                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

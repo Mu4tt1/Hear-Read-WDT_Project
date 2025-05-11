@@ -16,25 +16,11 @@ public class HomeController : Controller
         _logger = logger;
         _env = env;
     }
-    
+
     public IActionResult Index()
     {
-        var imageFolder = Path.Combine(_env.WebRootPath, "images");
-        var images = Directory.GetFiles(imageFolder)
-                              .Select(Path.GetFileName)
-                              .Where(name => !string.IsNullOrEmpty(name) && !name.Contains("Logo-Hear&Read"))
-                              .ToList();
-
-        ViewBag.Images = images;
-
-        var books = new List<Book>
-{
-    new Book { BookId = 1, Title = "The Power of Now", Author = "Eckhart Tolle", ImageUrl = "/images/photo1.jpeg", Description = "A guide to spiritual enlightenment." },
-    new Book { BookId = 2, Title = "Atomic Habits", Author = "James Clear", ImageUrl = "/images/photo2.jpeg",  Description = "Build good habits and break bad ones." },
-    new Book { BookId = 3, Title = "1984", Author = "George Orwell", ImageUrl = "/images/photo3.jpeg",  Description = "A dystopian social science fiction novel." },
-    new Book { BookId = 4, Title = "Sapiens", Author = "Yuval Noah Harari", ImageUrl = "/images/photo4.jpeg",  Description = "A brief history of humankind." }
-};
-        return View(books);
+        
+        return View();
     }
 
     public IActionResult Privacy()

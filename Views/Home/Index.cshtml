@@ -1,108 +1,405 @@
-﻿@model IEnumerable<Hear_Read_WDT_Project.Models.Book>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Maarefa - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet" />
+</head>
+<body>
+        <div class="container">
+            <nav>
+                <div class="logo"><a href="index.html">Al-Maarefa</a></div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="book.html">Books</a></li>
+                    <li class="auth-mobile"><a href="category.html">Categories</a></li>
+                    <li><a href="subscribe.html">Subscribe</a></li>
+                </ul>
+                <div class="auth-links">
+                    <a href="login.html" class="login">Log In</a>
+                    <a href="signup.html" class="signup">Sign Up</a>
+                </div>
+                <div class="hamburger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
 
+    <section class="hero">
+        <div class="container">
+            <h1>Your Gateway to a World of Knowledge</h1>
+            <p>Discover thousands of books across all genres. Read anywhere, anytime with our flexible subscription plans.</p>
+            <div class="hero-buttons">
+                <a href="book.html" class="btn btn-secondary">Explore Library</a>
+                <a href="subscribe.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+        </div>
+    </section>
 
-@{
-    ViewData["Title"] = "Home";
-}
-
-<link rel="stylesheet" href="~/css/custom.css" />
-
-<!-- Hero Section -->
-<section class="hero-banner">
-    <div class="hero-content text-center text-white">
-        <h1>Welcome to Hear&Read</h1>
-        <p>Your place for immersive audiobooks and engaging stories.</p>
-        <a href="/Users/Register" class="btn btn-warning">Start Listening</a>
-    </div>
-</section>
-
-@{
-    var images = ViewBag.Images as List<string>;
-    var groups = images.Select((img, idx) => new { img, idx }).GroupBy(x => x.idx / 3).ToList();
-}
-
-<section class="container section-spacing">
-    <h2 class="section-title text-center mb-5">Image Gallery</h2>
-
-    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-
-            @for (int g = 0; g < groups.Count; g++)
-            {
-                var isActive = g == 0 ? "active" : "";
-                <div class="carousel-item @isActive">
-                    <div class="row justify-content-center">
-                        @foreach (var item in groups[g])
-                        {
-                            <div class="col-md-4">
-                                <div class="card mb-4">
-                                    <img src="~/images/@item.img" class="card-img-top" alt="Book Image">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title">@item.img</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        }
+    <section class="featured-section">
+        <div class="container">
+            <h2 class="section-title">Featured Books</h2>
+            <p class="section-subtitle">Explore our handpicked selection of must-read titles</p>
+            <div class="featured-books">
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src="photo1.jpeg" alt="Book Cover">
+                    </div>
+                    <div class="book-details">
+                        <div class="book-category">Fiction</div>
+                        <h3 class="book-title">The Silent Echo</h3>
+                        <div class="book-author">By Layla Mahmoud</div>
+                        <p class="book-description">A mesmerizing tale of mystery and redemption set in ancient Damascus.</p>
+                        <a href="book.html" class="read-more">Read Now</a>
                     </div>
                 </div>
-            }
 
-        </div>
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src="photo2.jpeg" alt="Book Cover">
+                    </div>
+                    <div class="book-details">
+                        <div class="book-category">Business</div>
+                        <h3 class="book-title">Future Commerce</h3>
+                        <div class="book-author">By Ahmed Hassan</div>
+                        <p class="book-description">Innovative strategies for businesses in the digital age.</p>
+                        <a href="book.html" class="read-more">Read Now</a>
+                    </div>
+                </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</section>
-<section class="container py-5">
-    <h2 class="mb-4 text-center">Our Featured Books</h2>
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src="photo3.jpeg" alt="Book Cover">
+                    </div>
+                    <div class="book-details">
+                        <div class="book-category">Science</div>
+                        <h3 class="book-title">Quantum Horizons</h3>
+                        <div class="book-author">By Nora ElSayed</div>
+                        <p class="book-description">Exploring the fascinating world of quantum physics for everyday readers.</p>
+                        <a href="book.html" class="read-more">Read Now</a>
+                    </div>
+                </div>
 
-    <div class="row g-4">
-        @foreach (var book in Model)
-        {
-            <div>@book.Title</div>
-            <div class="col-md-4 col-lg-3">
-                <div class="card custom-card h-100 shadow-sm">
-                    <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">@book.Title</h5>
-                        <p class="text-muted mb-1">@book.Author</p>
-                        <p class="card-text text-sm">@book.Description</p>
-                        
+                <div class="book-card">
+                    <div class="book-image">
+                        <img src="photo6.jpeg" alt="Book Cover">
+                    </div>
+                    <div class="book-details">
+                        <div class="book-category">History</div>
+                        <h3 class="book-title">Golden Ages</h3>
+                        <div class="book-author">By Omar Khalid</div>
+                        <p class="book-description">An illustrated journey through Islamic scientific achievements.</p>
+                        <a href="book.html" class="read-more">Read Now</a>
                     </div>
                 </div>
             </div>
-        }
-    </div>
-</section>
-
-
-<!-- Categories -->
-<section class="categories-section section-spacing">
-    <div class="container text-center">
-        <h2 class="section-title">Browse Categories</h2>
-        <div class="row justify-content-center mt-4">
-            @{
-                var categories = new[] { "Drama", "Romance", "Sci-Fi", "Kids", "Mystery", "History" };
-                foreach (var cat in categories)
-                {
-                    <div class="col-md-2 col-4 mb-2">
-                        <button class="category-btn">@cat</button>
-                    </div>
-                }
-            }
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Call to Action -->
-<section class="cta-section text-center">
-    <h3>Start Your Free Trial Today</h3>
-    <p>Unlimited access to audiobooks and ebooks anytime, anywhere.</p>
-    <a href="/Users/Register" class="btn btn-success px-4 py-2">Join Now</a>
-</section>
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Browse by Category</h2>
+            <p class="section-subtitle">Find your next favorite read from our diverse collection</p>
+            <div class="categories">
+                <div class="category-card">
+                    <div class="category-icon">📚</div>
+                    <h3 class="category-name">Fiction</h3>
+                    <div class="category-count">3,500+ Books</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">💼</div>
+                    <h3 class="category-name">Business</h3>
+                    <div class="category-count">1,200+ Books</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🔬</div>
+                    <h3 class="category-name">Science</h3>
+                    <div class="category-count">800+ Books</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">📜</div>
+                    <h3 class="category-name">History</h3>
+                    <div class="category-count">1,500+ Books</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">💡</div>
+                    <h3 class="category-name">Self-Help</h3>
+                    <div class="category-count">900+ Books</div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🍜</div>
+                    <h3 class="category-name">Cookbooks</h3>
+                    <div class="category-count">500+ Books</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Al-Maarefa?</h2>
+            <p class="section-subtitle">Unlock a world of reading with unparalleled convenience and value</p>
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📖</div>
+                    <h3 class="benefit-title">Vast Library</h3>
+                    <p class="benefit-description">Access thousands of books across various genres, with new titles added regularly.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h3 class="benefit-title">Read Anywhere</h3>
+                    <p class="benefit-description">Enjoy reading on your smartphone, tablet, or computer – anytime, anywhere.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title">Affordable Subscription</h3>
+                    <p class="benefit-description">Get unlimited access to our library at a fraction of the cost of buying individual books.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⭐</div>
+                    <h3 class="benefit-title">Personalized Recommendations</h3>
+                    <p class="benefit-description">Discover new books tailored to your reading preferences and history.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Readers Say</h2>
+            <p class="section-subtitle">Real feedback from readers who love Al-Maarefa</p>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="quote">“</div>
+                    <p class="testimonial-text">Al-Maarefa has completely transformed my reading habits. I love the variety of books and the ease of reading on my tablet.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="img1.jpg" alt="User Avatar">
+                        </div>
+                        <div>
+                            <div class="author-name">Fatima Ali</div>
+                            <div class="author-title">Avid Reader</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">“</div>
+                    <p class="testimonial-text">The subscription is incredibly affordable for the amount of content you get. I've discovered so many new authors and genres.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="img3.jpeg" alt="User Avatar">
+                        </div>
+                        <div>
+                            <div class="author-name">Yousef Kamal</div>
+                            <div class="author-title">Student</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">“</div>
+                    <p class="testimonial-text">I appreciate the personalized recommendations. It's like having a librarian who knows exactly what I'd enjoy reading next!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="img 2.jpeg" alt="User Avatar">
+                        </div>
+                        <div>
+                            <div class="author-name">Aisha Noor</div>
+                            <div class="author-title">Book Enthusiast</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Our Growing Community</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-title">Registered Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-title">Books Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.8/5</div>
+                    <div class="stat-title">Average Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Dive In?</h2>
+            <p class="cta-subtitle">Join Al-Maarefa today and unlock a world of knowledge at your fingertips. Start your free trial now!</p>
+            <a href="subscribe.html" class="btn btn-primary btn-lg">Start Your Free Trial</a>
+        </div>
+    </section>
+
+    <section class="subscription-section">
+        <div class="container">
+            <h2 class="section-title">Subscription Plans</h2>
+            <p class="section-subtitle">Choose the plan that best suits your reading needs</p>
+            <div class="subscription-plans">
+                <div class="plan-card">
+                    <h3 class="plan-name">Basic</h3>
+                    <div class="plan-price">Free</div>
+                    <div class="plan-billing">per month</div>
+                    <ul class="plan-features">
+                        <li>Access to thousands of ebooks</li>
+                        <li>Read on one device at a time</li>
+                        <li>Standard support</li>
+                    </ul>
+                    <a href="subscribe.html" class="btn btn-secondary">Choose Plan</a>
+                </div>
+                <div class="plan-card popular">
+                    <div class="popular-tag">Popular</div>
+                    <h3 class="plan-name">Premium</h3>
+                    <div class="plan-price">$14.99</div>
+                    <div class="plan-billing">per month</div>
+                    <ul class="plan-features">
+                        <li>Unlimited access to all ebooks</li>
+                        <li>Read on up to 3 devices</li>
+                        <li>Priority support</li>
+                        <li>Exclusive content</li>
+                    </ul>
+                    <a href="subscribe.html" class="btn btn-primary">Choose Plan</a>
+                </div>
+                <div class="plan-card">
+                    <h3 class="plan-name">Family</h3>
+                    <div class="plan-price">$19.99</div>
+                    <div class="plan-billing">per month</div>
+                    <ul class="plan-features">
+                        <li>Unlimited access for up to 5 family members</li>
+                        <li>Read on multiple devices</li>
+                        <li>Premium support</li>
+                        <li>Parental controls</li>
+                    </ul>
+                    <a href="subscribe.html" class="btn btn-secondary">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="app-section">
+        <div class="container app-wrapper">
+            <div class="app-content">
+                <h2 class="app-title">Get Our Mobile App</h2>
+                <p class="app-description">Enjoy seamless reading on the go with our intuitive mobile app for iOS and Android.</p>
+                <div class="app-stores">
+                    <a href="www.apple.com" class="app-store-btn">
+                        <i class="fab fa-apple app-store-icon"></i>
+                        <div class="app-store-text">
+                            <div class="app-store-small">Download on the</div>
+                            <div class="app-store-large">App Store</div>
+                        </div>
+                    </a>
+                    <a href="play.google.com" class="app-store-btn">
+                        <i class="fab fa-google-play app-store-icon"></i>
+                        <div class="app-store-text">
+                            <div class="app-store-small">GET IT ON</div>
+                            <div class="app-store-large">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="app-image">
+                <img src="mokup.webp" alt="Mobile App Mockup">
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="section-title">Stay Updated</h2>
+            <p class="section-subtitle">Subscribe to our newsletter to get the latest book releases and exclusive offers.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your Email Address">
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>Al-Maarefa is your premier destination for online reading, offering a vast selection of ebooks across all genres. Our mission is to make knowledge accessible to everyone, everywhere.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="book.html">Books</a></li>
+                    <li><a href="subscribe.html">Subscribe</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p>Arish, North Sinai Governorate, Egypt</p>
+                <p>Email: info@almaarefa.com</p>
+                <p>Phone: +20 123 456 7890</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2025 Al-Maarefa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navSlide = () => {
+            const hamburger = document.querySelector(".hamburger");
+            const nav = document.querySelector(".nav-links");
+            const navLinks = document.querySelectorAll(".nav-links li");
+
+            hamburger.addEventListener('click', () => {
+                // Toggle Nav
+                nav.classList.toggle('nav-active');
+
+                // Animate Links
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+
+                // Hamburger Animation
+                hamburger.classList.toggle('toggle');
+            });
+        }
+
+        navSlide();
+
+        // Font Awesome Integration (Add this to your <head> or include via CDN)
+        const fontAwesomeLink = document.createElement('link');
+        fontAwesomeLink.rel = 'stylesheet';
+        fontAwesomeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+        document.head.appendChild(fontAwesomeLink);
+    </script>
+</body>
+</html>

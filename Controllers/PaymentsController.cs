@@ -21,7 +21,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // GET: Payments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Payments.Include(p => p.Subscription);
+            var applicationDbContext = _context.Payments.Include(p => p.Plan).Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +34,8 @@ namespace Hear_Read_WDT_Project.Controllers
             }
 
             var payment = await _context.Payments
-                .Include(p => p.Subscription)
+                .Include(p => p.Plan)
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.PaymentId == id);
             if (payment == null)
             {
@@ -47,7 +48,8 @@ namespace Hear_Read_WDT_Project.Controllers
         // GET: Payments/Create
         public IActionResult Create()
         {
-            ViewData["SubscriptionId"] = new SelectList(_context.Subscriptions, "SubscriptionId", "SubscriptionId");
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId");
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             return View();
         }
 
@@ -56,7 +58,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentId,SubscriptionId,Amount,PaymentMethod,PaymentStatus,TransactionId,PaymentDate")] Payment payment)
+        public async Task<IActionResult> Create([Bind("PaymentId,UserId,PlanId,PaymentDate,Amount,Status")] Payment payment)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +66,8 @@ namespace Hear_Read_WDT_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubscriptionId"] = new SelectList(_context.Subscriptions, "SubscriptionId", "SubscriptionId", payment.SubscriptionId);
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId", payment.PlanId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", payment.UserId);
             return View(payment);
         }
 
@@ -81,7 +84,8 @@ namespace Hear_Read_WDT_Project.Controllers
             {
                 return NotFound();
             }
-            ViewData["SubscriptionId"] = new SelectList(_context.Subscriptions, "SubscriptionId", "SubscriptionId", payment.SubscriptionId);
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId", payment.PlanId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", payment.UserId);
             return View(payment);
         }
 
@@ -90,7 +94,7 @@ namespace Hear_Read_WDT_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PaymentId,SubscriptionId,Amount,PaymentMethod,PaymentStatus,TransactionId,PaymentDate")] Payment payment)
+        public async Task<IActionResult> Edit(int id, [Bind("PaymentId,UserId,PlanId,PaymentDate,Amount,Status")] Payment payment)
         {
             if (id != payment.PaymentId)
             {
@@ -117,7 +121,8 @@ namespace Hear_Read_WDT_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubscriptionId"] = new SelectList(_context.Subscriptions, "SubscriptionId", "SubscriptionId", payment.SubscriptionId);
+            ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "PlanId", payment.PlanId);
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", payment.UserId);
             return View(payment);
         }
 
@@ -130,7 +135,8 @@ namespace Hear_Read_WDT_Project.Controllers
             }
 
             var payment = await _context.Payments
-                .Include(p => p.Subscription)
+                .Include(p => p.Plan)
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.PaymentId == id);
             if (payment == null)
             {

@@ -13,22 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentMethod)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TransactionId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PaymentDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Subscription)
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plan)
             </th>
             <th></th>
         </tr>
@@ -37,22 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransactionId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.PaymentDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Subscription.SubscriptionId)
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plan.PlanId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PaymentId">Edit</a> |

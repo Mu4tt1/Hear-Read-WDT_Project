@@ -34,54 +34,17 @@ namespace Hear_Read_WDT_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("AuthorId");
 
                     b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.AuthorCopyright", b =>
-                {
-                    b.Property<int>("BookCopyrightId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookCopyrightId"));
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LicenseType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Publisher")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Terms")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BookCopyrightId");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("AuthorCopyrights");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Book", b =>
@@ -90,40 +53,34 @@ namespace Hear_Read_WDT_Project.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"));
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("CoverImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
-
-                    b.Property<bool>("IsPremiumOnly")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Language")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NarratorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("PublishedDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
+                    b.Property<int>("PublishingHouseId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("BookId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("NarratorId");
 
@@ -155,13 +112,21 @@ namespace Hear_Read_WDT_Project.Migrations
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.BookCategory", b =>
                 {
+                    b.Property<int>("BookCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookCategoryId"));
+
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.HasKey("BookId");
+                    b.HasKey("BookCategoryId");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("CategoryId");
 
@@ -178,45 +143,12 @@ namespace Hear_Read_WDT_Project.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.DownloadLog", b =>
-                {
-                    b.Property<int>("LogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogId"));
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DeviceInfo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DownloadDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("IpAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LogId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("DownloadLogs");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Narrator", b =>
@@ -233,40 +165,12 @@ namespace Hear_Read_WDT_Project.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("NarratorId");
 
                     b.ToTable("Narrators");
-                });
-
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.OfflineAccess", b =>
-                {
-                    b.Property<int>("OfflineId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OfflineId"));
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DownloadDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ValidUntil")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("OfflineId");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("OfflineAccesses");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Payment", b =>
@@ -283,26 +187,76 @@ namespace Hear_Read_WDT_Project.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SubscriptionId")
+                    b.Property<int>("PlanId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TransactionId")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("PaymentId");
 
-                    b.HasIndex("SubscriptionId");
+                    b.HasIndex("PlanId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("Hear_Read_WDT_Project.Models.Plan", b =>
+                {
+                    b.Property<int>("PlanId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlanId"));
+
+                    b.Property<int>("DurationInDays")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("PlanId");
+
+                    b.ToTable("Plans");
+                });
+
+            modelBuilder.Entity("Hear_Read_WDT_Project.Models.PublishingHouse", b =>
+                {
+                    b.Property<int>("PublishingHouseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PublishingHouseId"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PublishingHouseId");
+
+                    b.ToTable("PublishingHouses");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Review", b =>
@@ -316,7 +270,7 @@ namespace Hear_Read_WDT_Project.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Comment")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -346,15 +300,11 @@ namespace Hear_Read_WDT_Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubscriptionId"));
 
-                    b.Property<bool>("CanDownload")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PlanType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PlanId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -363,6 +313,8 @@ namespace Hear_Read_WDT_Project.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("SubscriptionId");
+
+                    b.HasIndex("PlanId");
 
                     b.HasIndex("UserId");
 
@@ -377,14 +329,7 @@ namespace Hear_Read_WDT_Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -392,43 +337,39 @@ namespace Hear_Read_WDT_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SubscriptionType")
+                    b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.AuthorCopyright", b =>
+            modelBuilder.Entity("Hear_Read_WDT_Project.Models.Book", b =>
                 {
-                    b.HasOne("Hear_Read_WDT_Project.Models.Author", "Author")
-                        .WithMany("AuthorCopyrights")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hear_Read_WDT_Project.Models.Book", "Book")
-                        .WithMany("AuthorCopyrights")
+                    b.HasOne("Hear_Read_WDT_Project.Models.PublishingHouse", "PublishingHouse")
+                        .WithMany("Books")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.HasOne("Hear_Read_WDT_Project.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.Book", b =>
-                {
-                    b.HasOne("Hear_Read_WDT_Project.Models.Narrator", "Narrator")
+                    b.HasOne("Hear_Read_WDT_Project.Models.Narrator", null)
                         .WithMany("Books")
                         .HasForeignKey("NarratorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Narrator");
+                    b.Navigation("Category");
+
+                    b.Navigation("PublishingHouse");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.BookAuthor", b =>
@@ -469,53 +410,23 @@ namespace Hear_Read_WDT_Project.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.DownloadLog", b =>
-                {
-                    b.HasOne("Hear_Read_WDT_Project.Models.Book", "Book")
-                        .WithMany("DownloadLogs")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hear_Read_WDT_Project.Models.User", "User")
-                        .WithMany("DownloadLogs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.OfflineAccess", b =>
-                {
-                    b.HasOne("Hear_Read_WDT_Project.Models.Book", "Book")
-                        .WithMany("OfflineAccesses")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hear_Read_WDT_Project.Models.User", "User")
-                        .WithMany("OfflineAccesses")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Payment", b =>
                 {
-                    b.HasOne("Hear_Read_WDT_Project.Models.Subscription", "Subscription")
-                        .WithMany("Payments")
-                        .HasForeignKey("SubscriptionId")
+                    b.HasOne("Hear_Read_WDT_Project.Models.Plan", "Plan")
+                        .WithMany()
+                        .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Subscription");
+                    b.HasOne("Hear_Read_WDT_Project.Models.User", "User")
+                        .WithMany("Payments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Plan");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Review", b =>
@@ -539,33 +450,33 @@ namespace Hear_Read_WDT_Project.Migrations
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Subscription", b =>
                 {
+                    b.HasOne("Hear_Read_WDT_Project.Models.Plan", "Plan")
+                        .WithMany("Subscriptions")
+                        .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Hear_Read_WDT_Project.Models.User", "User")
                         .WithMany("Subscriptions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Plan");
+
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Author", b =>
                 {
-                    b.Navigation("AuthorCopyrights");
-
                     b.Navigation("BookAuthors");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.Book", b =>
                 {
-                    b.Navigation("AuthorCopyrights");
-
                     b.Navigation("BookAuthors");
 
                     b.Navigation("BookCategories");
-
-                    b.Navigation("DownloadLogs");
-
-                    b.Navigation("OfflineAccesses");
 
                     b.Navigation("Reviews");
                 });
@@ -580,16 +491,19 @@ namespace Hear_Read_WDT_Project.Migrations
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("Hear_Read_WDT_Project.Models.Subscription", b =>
+            modelBuilder.Entity("Hear_Read_WDT_Project.Models.Plan", b =>
                 {
-                    b.Navigation("Payments");
+                    b.Navigation("Subscriptions");
+                });
+
+            modelBuilder.Entity("Hear_Read_WDT_Project.Models.PublishingHouse", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Hear_Read_WDT_Project.Models.User", b =>
                 {
-                    b.Navigation("DownloadLogs");
-
-                    b.Navigation("OfflineAccesses");
+                    b.Navigation("Payments");
 
                     b.Navigation("Reviews");
 

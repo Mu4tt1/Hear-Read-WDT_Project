@@ -9,15 +9,17 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int SubscriptionId { get; set; }
+
         public int UserId { get; set; }
-        public string PlanType { get; set; } 
+
+        public int PlanId { get; set; }
+
         public DateTime StartDate { get; set; }
+
         public DateTime EndDate { get; set; }
-        public bool CanDownload { get; set; }
 
-        [ForeignKey("UserId")]
         public User User { get; set; }
-        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
+        public Plan Plan { get; set; }
     }
 }

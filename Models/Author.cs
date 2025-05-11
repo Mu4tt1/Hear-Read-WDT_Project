@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hear_Read_WDT_Project.Models
 {
@@ -7,10 +8,15 @@ namespace Hear_Read_WDT_Project.Models
     {
         [Key]
         public int AuthorId { get; set; }
-        public string Name { get; set; }
-        public string Bio { get; set; }
-        public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
-        public ICollection<AuthorCopyright> AuthorCopyrights { get; set; } = new List<AuthorCopyright>();//hh
 
+        [Required, MaxLength(100)]
+        public string Name { get; set; }
+
+        public string Bio { get; set; }
+        [ForeignKey("BookId")]
+        public int BookId { get; set; }
+
+        public ICollection<BookAuthor> BookAuthors { get; set; }
+        
     }
 }
